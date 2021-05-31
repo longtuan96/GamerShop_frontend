@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import GameSlider from "../../components/GameSlider";
 
 import HomeBoard from "../../components/HomeBoard";
+import UserCart from "../../components/UserCart";
 
 const LatestPage = () => {
   const games = useSelector((state) => state.game.games);

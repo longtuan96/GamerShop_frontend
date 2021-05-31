@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 
-const SmallGameBox = ({ game }) => {
+const SmallGameBox = ({ game, isWithInfo }) => {
   const history = useHistory();
   const handleClick = (id) => {
     history.push(`/game/${id}`);
@@ -12,9 +12,15 @@ const SmallGameBox = ({ game }) => {
       onClick={() => handleClick(game._id)}
     >
       <img src={game.picture} alt="small pic" style={{ width: "100%" }} />
-      <p>{game.name}</p>
-      <p>{game.status}</p>
-      <p>{game.price}</p>
+      {isWithInfo === true ? (
+        <>
+          <p>{game.name}</p>
+          <p>{game.status}</p>
+          <p>{game.price}</p>
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

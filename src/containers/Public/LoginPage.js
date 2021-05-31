@@ -16,7 +16,11 @@ const LoginPage = () => {
     password: "",
   });
 
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  let isAuthenticated = false;
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken !== "" && accessToken !== null && accessToken !== undefined) {
+    isAuthenticated = true;
+  }
   const loading = useSelector((state) => state.auth.loading);
 
   const handleChange = (e) =>

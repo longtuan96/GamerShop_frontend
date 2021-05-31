@@ -22,6 +22,7 @@ const loginRequest = (email, password) => async (dispatch) => {
   try {
     const res = await api.post("/auth/login", { email, password });
     dispatch({ type: types.LOGIN_SUCCESS, payload: res.data.data });
+
     const name = res.data.data.user.name;
     toast.success(`Welcome ${name}`);
   } catch (error) {
@@ -30,7 +31,16 @@ const loginRequest = (email, password) => async (dispatch) => {
   }
 };
 
+const logoutRequest = () => async (dispatch) => {
+  dispatch({ type: types.LOGOUT_REQUEST, payload: null });
+  api.defaults.headers.common["authorization"] = "";
+  localStorage.clear();
+
+  dispatch({ type: types.LOGOUT_SUCCESS, payload: null });
+};
+
 export const authActions = {
   register,
   loginRequest,
+  logoutRequest,
 };

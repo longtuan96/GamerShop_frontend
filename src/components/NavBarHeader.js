@@ -1,9 +1,26 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import { Form, Button, FormControl, Row, Col } from "react-bootstrap";
 import UserBox from "./UserBox";
+import { useDispatch } from "react-redux";
+import { gameActions } from "../redux/actions/game.actions";
 
 const NavBarHeader = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    name: null,
+  });
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(gameActions.searchGame(formData));
+    history.push("/search");
+  };
+
   return (
     <div
       style={{ zIndex: 10, position: "fixed", width: "100%", height: "10%" }}
@@ -38,7 +55,7 @@ const NavBarHeader = () => {
           </NavLink>
 
           <NavLink
-            to="/latest"
+            to="/deals"
             activeClassName="NavBar-LinkActive"
             className="NavBar-Link"
           >
@@ -50,9 +67,16 @@ const NavBarHeader = () => {
             <UserBox />
           </div>
           <div style={{ width: "50%" }}>
-            <Form inline className="d-flex ">
-              <FormControl type="text" placeholder="Search" />
-              <Button variant="outline-dark">Search</Button>
+            <Form inline className="d-flex " onSubmit={handleSubmit}>
+              <FormControl
+                type="text"
+                placeholder="Search"
+                name="name"
+                onChange={handleChange}
+              />
+              <Button variant="outline-dark" type="submit">
+                Search
+              </Button>
             </Form>
           </div>
         </Col>

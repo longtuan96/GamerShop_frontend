@@ -18,8 +18,8 @@ const GameSlider = ({ games, title }) => {
         {games !== null || games !== undefined || games !== [] ? (
           <Slider {...settings}>
             {games.map((item) => (
-              <div>
-                <SmallGameBox game={item} />
+              <div key={item._id}>
+                <SmallGameBox game={item} isWithInfo={true} />
               </div>
             ))}
           </Slider>

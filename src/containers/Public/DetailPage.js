@@ -3,17 +3,42 @@ import { Col, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { gameActions } from "../../redux/actions/game.actions";
+import { orderActions } from "../../redux/actions/order.actions";
+import { userActions } from "../../redux/actions/user.actions";
 
 const DetailPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const selectedGame = useSelector((state) => state.game.selectedGame);
+  const loading = useSelector((state) => state.game.loading);
 
+  const handleClick = (btn, id) => {
+    switch (btn) {
+      case "add to cart":
+        dispatch(orderActions.addItemCurrentOrder(id));
+        dispatch(userActions.getCurrentUser());
+        break;
+      case "add to favorite":
+        dispatch(userActions.addToFavorite(id));
+        dispatch(userActions.getCurrentUser());
+        break;
+      case "remove from favorite":
+        dispatch(userActions.removeFromFavorite(id));
+        dispatch(userActions.getCurrentUser());
+        break;
+      case "remove from cart":
+        dispatch(orderActions.removeItemCurrentOrder(id));
+        dispatch(userActions.getCurrentUser());
+        break;
+      default:
+        break;
+    }
+  };
   useEffect(() => {
     dispatch(gameActions.getSingleGame(id));
   }, []);
 
-  const selectedGame = useSelector((state) => state.game.selectedGame);
-  const loading = useSelector((state) => state.game.loading);
   return (
     <>
       {loading === "true" &&
@@ -41,8 +66,44 @@ const DetailPage = () => {
                 selectedGame.platform.map((item) => <div>{item}</div>)}
               <div>{selectedGame.price}</div>
               <div>
-                <button> add to cart</button>
-                <button>heart</button>
+                {currentUser.cart &&
+                currentUser.cart.games.indexOf(selectedGame._id) === -1 ? (
+                  <button
+                    onClick={() => handleClick("add to cart", selectedGame._id)}
+                  >
+                    {" "}
+                    add to cart
+                  </button>
+                ) : (
+                  <button
+                    onClick={() =>
+                      handleClick("remove from cart", selectedGame._id)
+                    }
+                  >
+                    {" "}
+                    remove from cart
+                  </button>
+                )}
+                {currentUser.favorite &&
+                currentUser.favorite.filter(
+                  (item) => item._id === selectedGame._id
+                ).length === 0 ? (
+                  <button
+                    onClick={() =>
+                      handleClick("add to favorite", selectedGame._id)
+                    }
+                  >
+                    heart
+                  </button>
+                ) : (
+                  <button
+                    onClick={() =>
+                      handleClick("remove from favorite", selectedGame._id)
+                    }
+                  >
+                    remove from favorite
+                  </button>
+                )}
               </div>
             </div>
           </div>
