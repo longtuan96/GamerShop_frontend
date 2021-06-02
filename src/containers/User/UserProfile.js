@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Table, Modal, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import UserProfileEditBox from "../../components/UserProfileEditBox";
-
+import { Box, Text } from "@chakra-ui/react";
 const UserProfile = () => {
   const [show, setShow] = useState(false);
   const [editButton, setEditButton] = useState("");
@@ -14,9 +14,11 @@ const UserProfile = () => {
     setShow(true);
   };
   return (
-    <>
-      <h1>Profile</h1>
-      <Table>
+    <div style={{ padding: "5%" }}>
+      <Text fontSize="2xl" fontWeight="bold">
+        Profile
+      </Text>
+      <Table size="md" style={{ margin: "5% 0", width: "60%" }}>
         <tbody>
           <tr>
             <td>Name</td>
@@ -64,7 +66,7 @@ const UserProfile = () => {
       <Modal show={show} onHide={handleClose}>
         <UserProfileEditBox btn={editButton} />
       </Modal>
-    </>
+    </div>
   );
 };
 

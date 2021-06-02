@@ -2,6 +2,7 @@ import * as types from "../constants/user.constants";
 const initialState = {
   users: [],
   currentUser: {},
+  currentUserFavorite: [],
   totalPageNum: 1,
   selectedUser: {},
   loading: false,
@@ -72,6 +73,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: payload,
+        currentUserFavorite: payload.favorite,
         loading: false,
       };
     case types.USER_GETCURRENT_FAILURE:

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Card, Form, Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/actions/user.actions";
 
 const UserProfileEditBox = ({ btn }) => {
   const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => state.user.currentUser);
   const [formData, setFormData] = useState({
     name: null,
     gender: null,
@@ -32,7 +34,7 @@ const UserProfileEditBox = ({ btn }) => {
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Name"
+                  placeholder={`Name (current:${currentUser.name})`}
                   name="name"
                   onChange={handleChange}
                 />
@@ -42,7 +44,7 @@ const UserProfileEditBox = ({ btn }) => {
                 <Form.Label>Gender</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Gender"
+                  placeholder={`Gender (current:${currentUser.gender})`}
                   name="gender"
                   onChange={handleChange}
                 />
@@ -52,7 +54,7 @@ const UserProfileEditBox = ({ btn }) => {
                 <Form.Label>Language</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Name"
+                  placeholder={`Language (current:${currentUser.language})`}
                   name="language"
                   onChange={handleChange}
                 />

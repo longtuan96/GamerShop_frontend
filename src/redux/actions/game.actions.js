@@ -100,6 +100,23 @@ const getDealsGame = () => async (dispatch) => {
   }
 };
 
+const getGenreGames = (genre, page) => async (dispatch) => {
+  dispatch({ type: types.GAME_GETGENRE_REQUEST, payload: null });
+  try {
+    const res = await api.post(`/game/genre/${genre}?page=${page}&limit=6`);
+    dispatch({
+      type: types.GAME_GETGENRE_SUCCESS,
+      payload: {
+        games: res.data.data.games,
+        title: genre,
+        totalPages: res.data.data.totalPages,
+      },
+    });
+  } catch (error) {
+    dispatch({ type: types.GAME_GETDEALS_FAILURE, payload: error.message });
+  }
+};
+
 export const gameActions = {
   getGames,
   getAllGames,
@@ -109,4 +126,5 @@ export const gameActions = {
   addGame,
   searchGame,
   getDealsGame,
+  getGenreGames,
 };

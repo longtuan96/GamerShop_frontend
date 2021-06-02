@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SmallGameBox from "../../components/SmallGameBox";
 import { gameActions } from "../../redux/actions/game.actions";
-
+import { Box, Text } from "@chakra-ui/react";
 const DealsPage = () => {
   const deals = useSelector((state) => state.game.deals);
   const dispatch = useDispatch();
@@ -13,7 +13,11 @@ const DealsPage = () => {
   return (
     <div>
       <div style={{ padding: "100px" }}>
-        <h1>Deals</h1>
+        <div className="text-center">
+          <Text fontSize="5xl" fontWeight="bold">
+            Deals
+          </Text>
+        </div>
         <div>
           <Row>
             {deals &&

@@ -11,6 +11,8 @@ import PrivateRoute from "./PrivateRoute";
 const Routes = (props) => {
   return (
     <Switch>
+      <Route path="/login" component={LoginPage} />
+      <Route path="/register" component={RegisterPage} />
       <PrivateRoute path="/user" component={UserLayout} />
       <AdminRoute path="/admin" component={AdminLayout} />
       <Route path="/" component={PublicLayout} />

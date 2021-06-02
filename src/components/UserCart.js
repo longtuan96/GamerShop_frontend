@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Row, Table, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { orderActions } from "../redux/actions/order.actions";
-
+import { Divider, Button, IconButton, Text, Box } from "@chakra-ui/react";
+import { DeleteIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { Home, Wallet } from "react-iconly";
+import GameMedia from "./GameMedia";
 const UserCart = () => {
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
@@ -43,80 +46,98 @@ const UserCart = () => {
               <h3>Please log in first</h3>
             ) : (
               <>
-                <h1>Confirm Purchase</h1>
-                <Table>
+                <Table borderless>
                   <tbody>
                     <tr>
-                      <td>Subtotal</td>
-                      <td>{subTotal}</td>
+                      <td style={{ textAlign: "left" }}>Subtotal</td>
+                      <td style={{ textAlign: "right" }}>{`$${subTotal}`}</td>
                     </tr>
                     <tr>
-                      <td>Discount</td>
-                      <td>{discount}</td>
+                      <td style={{ textAlign: "left", color: "blue" }}>
+                        Discount
+                      </td>
+                      <td
+                        style={{ textAlign: "right", color: "blue" }}
+                      >{`$${discount}`}</td>
                     </tr>
                     <tr>
-                      <td>Total </td>
-                      <td>{total}</td>
+                      <td style={{ textAlign: "left", fontWeight: "bold" }}>
+                        Total{" "}
+                      </td>
+                      <td
+                        style={{ textAlign: "right", fontWeight: "bold" }}
+                      >{`$${total}`}</td>
                     </tr>
                   </tbody>
                 </Table>
                 <div>
-                  <h4>Payment Method</h4>
-                  <div className="d-flex">
-                    <img src="" alt="icon COD" />
-                    <div>
-                      <p>{currentUser.balance}</p>
-                      <p>Your Wallet</p>
-                    </div>
-                  </div>
+                  <Text fontSize="xl" fontWeight="bold" m={4}>
+                    Payment Method
+                  </Text>
+                  <Box
+                    p="5"
+                    borderRadius="md"
+                    borderWidth="1px"
+                    style={{ boxShadow: "2px 2px 3px black" }}
+                  >
+                    <Row>
+                      <Col
+                        lg={2}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Wallet set="light" primaryColor="black" size="large" />
+                      </Col>
+                      <Col lg={8}>
+                        {`$${currentUser.balance}`}{" "}
+                        <Text color="gray">Your Wallet</Text>
+                      </Col>
+                      <Col
+                        lg={2}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <ChevronRightIcon boxSize="50px" />
+                      </Col>
+                    </Row>
+                  </Box>
                 </div>
                 <div>
-                  <h1>summary</h1>
+                  <Text fontSize="xl" fontWeight="bold" m={4}>
+                    Summary
+                  </Text>
                   {currentOrder.games &&
                     currentOrder.games.map((item) => (
-                      <div key={item._id}>
-                        <div className="d-flex">
-                          <img
-                            src={item.icon}
-                            alt="game icon"
-                            style={{ width: "40px" }}
-                          />
-                          <div>
-                            <strong>{item.name}</strong>
-                            <div className="d-flex">
-                              {item.discount !== 0 ? (
-                                <>
-                                  <div>{`-${item.discount}%`}</div>
-                                  <div>{`$${
-                                    (item.price * item.discount) / 100
-                                  }`}</div>
-                                  <div>{`$${item.price}`}</div>
-                                </>
-                              ) : (
-                                <p>{`$${item.price}`}</p>
-                              )}
-                            </div>
-                          </div>
-                          <button
-                            onClick={() => handleClick("remove", item._id)}
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      </div>
+                      <>
+                        <Divider color="gray" mt={4} mb={4} />
+                        <GameMedia game={item} />
+                      </>
                     ))}
                 </div>
-                <hr />
-                <div>
-                  <p>
+                <Divider color="gray" mt={4} mb={4} />
+                <div className="text-center">
+                  <Text size="xs">
                     By selecting [Confirm Purchase] you agree to complete the
                     purchase in accordance with the Terms of Service before
                     using this content
-                  </p>
-                  <button onClick={() => handleClick("payment")}>
+                  </Text>
+
+                  <Button
+                    m={2}
+                    isLoading={loading}
+                    colorScheme="blue"
+                    isFullWidth={true}
+                    onClick={() => handleClick("payment")}
+                  >
                     Confirm Purchase
-                  </button>{" "}
-                </div>{" "}
+                  </Button>
+                </div>
               </>
             )}
           </div>

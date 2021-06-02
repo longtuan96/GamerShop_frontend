@@ -2,11 +2,14 @@ import * as types from "../constants/game.constants";
 const initialState = {
   addedGame: {},
   searchGames: [],
+  genreGames: [],
+  genrePageTitle: "",
   allGames: [],
   deals: [],
   games: [],
   game: {},
   selectedGame: {},
+  totalPage: 0,
   loading: true,
 };
 
@@ -26,6 +29,7 @@ const gameReducer = (state = initialState, action) => {
     case types.GAME_ADD_REQUEST:
     case types.GAME_SEARCH_REQUEST:
     case types.GAME_GETDEALS_REQUEST:
+    case types.GAME_GETGENRE_REQUEST:
       return { ...state, loading: true };
 
     case types.GAME_ADD_SUCCESS:
@@ -52,6 +56,14 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         searchGames: payload,
+        loading: false,
+      };
+    case types.GAME_GETGENRE_SUCCESS:
+      return {
+        ...state,
+        genreGames: payload.games,
+        genrePageTitle: payload.title,
+        totalPages: payload.totalPages,
         loading: false,
       };
     case types.GAME_GETDEALS_SUCCESS:
@@ -97,7 +109,9 @@ const gameReducer = (state = initialState, action) => {
     case types.GAME_GETDEALS_FAILURE:
       console.log("Error in deals Game!!=>", payload);
       return { ...state, loading: false };
-
+    case types.GAME_GETGENRE_FAILURE:
+      console.log("Error in genre Games!!=>", payload);
+      return { ...state, loading: false };
     default:
       return state;
   }
