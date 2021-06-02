@@ -52,9 +52,9 @@ const Banner = ({ poster, trailer, description, title, gameId, isRight }) => {
                   height="100%"
                   src={`https://www.youtube.com/embed/${trailer}`}
                   title="YouTube video player"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></iframe>
               </Box>
             </Col>
@@ -77,9 +77,9 @@ const Banner = ({ poster, trailer, description, title, gameId, isRight }) => {
                   height="100%"
                   src={`https://www.youtube.com/embed/${trailer}`}
                   title="YouTube video player"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></iframe>
               </Box>
             </Col>

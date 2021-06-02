@@ -1,10 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Modal, Form } from "react-bootstrap";
+import { Table, Button, Modal, Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { gameActions } from "../../redux/actions/game.actions";
-
+import Pagination from "react-pagination-library";
+import {
+  FormControl,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  IconButton,
+  Image,
+  Text,
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import { useHistory } from "react-router";
 const GamesPage = () => {
+  const [searchData, setSearchData] = useState({
+    name: "",
+  });
+  const history = useHistory();
   const dispatch = useDispatch();
+
+  const [state, setState] = useState({
+    currentPage: 1,
+  });
+
   //useState
   const [formData, setFormData] = useState({
     name: null,
@@ -29,7 +49,7 @@ const GamesPage = () => {
   const [id, setId] = useState("");
   //useSelector
   const allGames = useSelector((state) => state.game.allGames);
-
+  const totalPages = useSelector((state) => state.game.totalPages);
   //Functions
   const clearFormData = () => {
     setFormData({
@@ -54,7 +74,7 @@ const GamesPage = () => {
   //handle functions
   const handleClose = () => {
     setShow(false);
-    dispatch(gameActions.getAllGames());
+    // dispatch(gameActions.getAllGames());
   };
   const handleShow = (btnName, itemId) => {
     clearFormData();
@@ -62,7 +82,11 @@ const GamesPage = () => {
     setModalTitle(btnName);
     setShow(true);
   };
-
+  //For pagination
+  const changeCurrentPage = (numPage) => {
+    setState({ currentPage: numPage });
+    dispatch(gameActions.getAllGames(searchData.name, numPage));
+  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -81,14 +105,30 @@ const GamesPage = () => {
     dispatch(gameActions.deleteGame(id));
   };
 
+  const handleChangeSearch = (e) => {
+    setSearchData({ name: e.target.value });
+  };
+  const handleSearchSubmit = () => {
+    dispatch(gameActions.getAllGames(searchData.name));
+  };
   //useEffect
   useEffect(() => {
-    dispatch(gameActions.getAllGames());
+    dispatch(gameActions.getAllGames(""));
   }, []);
+
+  const formatCurrency = (number) => {
+    if (number)
+      return number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+  };
   return (
     <>
-      <h1>THis is GAMES PAGE</h1>
-      <div>
+      <div style={{ padding: "5%" }}>
+        <Text fontSize="2xl" fontWeight="bold">
+          Profile
+        </Text>
         <Button variant="primary" onClick={() => handleShow("Add Game")}>
           Add Game
         </Button>
@@ -119,8 +159,8 @@ const GamesPage = () => {
                   <td>{item.name}</td>
                   <td>{item.publisher}</td>
                   <td>{item.status}</td>
-                  <td>{item.discount}</td>
-                  <td>{item.price}</td>
+                  <td>{`${item.discount}%`}</td>
+                  <td>{item.price && formatCurrency(item.price)}</td>
                   <td>{item.isDeleted ? "Yes" : "No"}</td>
                   <td className="">
                     <Button
@@ -141,6 +181,51 @@ const GamesPage = () => {
             )}
           </tbody>
         </Table>
+        <Row style={{ width: "100%" }}>
+          <Col></Col>
+          <Col>
+            <Pagination
+              currentPage={state.currentPage}
+              totalPages={totalPages}
+              changeCurrentPage={changeCurrentPage}
+              theme="bottom-border"
+            />
+          </Col>
+          <Col
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <FormControl>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={
+                    <IconButton
+                      aria-label="Search database"
+                      variant="unstyled"
+                      icon={<SearchIcon color="gray.300" />}
+                      onClick={handleSearchSubmit}
+                    />
+                  }
+                />
+                <Input
+                  type="text"
+                  placeholder="Search"
+                  name="name"
+                  onChange={handleChangeSearch}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      handleSearchSubmit();
+                    }
+                  }}
+                />
+              </InputGroup>
+            </FormControl>
+          </Col>
+        </Row>
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>

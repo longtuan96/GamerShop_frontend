@@ -75,7 +75,8 @@ const gameReducer = (state = initialState, action) => {
     case types.GAME_GETALL_SUCCESS:
       return {
         ...state,
-        allGames: payload,
+        allGames: payload.games,
+        totalPages: payload.totalPages,
         loading: false,
       };
     case types.GAME_DELETE_SUCCESS:

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import AlertMsg from "../../../components/AlertMsg";
@@ -11,6 +11,7 @@ import MembersPage from "../../Admin/MembersPage";
 const AdminLayout = () => {
   const location = useLocation();
   const history = useHistory();
+
   return (
     <>
       <>

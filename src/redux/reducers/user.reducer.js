@@ -6,6 +6,7 @@ const initialState = {
   totalPageNum: 1,
   selectedUser: {},
   loading: false,
+  updatedUser: {},
 };
 
 const userReducer = (state = initialState, action) => {
@@ -17,6 +18,7 @@ const userReducer = (state = initialState, action) => {
     case types.USER_UPDATE_SUCCESS:
       return {
         ...state,
+        updatedUser: payload,
         loading: false,
       };
     case types.USER_UPDATE_FAILURE:

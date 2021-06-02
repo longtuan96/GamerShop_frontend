@@ -6,6 +6,7 @@ const initialState = {
   subTotal: 0,
   discount: 0,
   order: {},
+  orders: [],
 };
 
 const orderReducer = (state = initialState, action) => {
@@ -16,6 +17,8 @@ const orderReducer = (state = initialState, action) => {
     case types.ORDER_REMOVEITEM_REQUEST:
     case types.ORDER_GETSINGLE_REQUEST:
     case types.ORDER_GETCURRENT_REQUEST:
+    case types.ORDER_PAYMENT_REQUEST:
+    case types.ORDER_GETCURRENTALL_REQUEST:
       return { ...state, loading: true };
 
     case types.ORDER_GETSINGLE_SUCCESS:
@@ -24,8 +27,16 @@ const orderReducer = (state = initialState, action) => {
         order: payload,
         loading: false,
       };
+
+    case types.ORDER_GETCURRENTALL_SUCCESS:
+      return {
+        ...state,
+        orders: payload,
+        loading: false,
+      };
     case types.ORDER_REMOVEITEM_SUCCESS:
     case types.ORDER_ADDITEM_SUCCESS:
+    case types.ORDER_PAYMENT_SUCCESS:
       return {
         ...state,
 
@@ -55,12 +66,17 @@ const orderReducer = (state = initialState, action) => {
     case types.ORDER_GETCURRENT_FAILURE:
       console.log("Error in get current order!!=>", payload);
       return { ...state, loading: false };
-
+    case types.ORDER_GETCURRENTALL_FAILURE:
+      console.log("Error in get all current user orders!!=>", payload);
+      return { ...state, loading: false };
     case types.ORDER_ADDITEM_FAILURE:
       console.log("Error in add item to order!!=>", payload);
       return { ...state, loading: false };
     case types.ORDER_REMOVEITEM_FAILURE:
       console.log("Error in remove item from order!!=>", payload);
+      return { ...state, loading: false };
+    case types.ORDER_PAYMENT_FAILURE:
+      console.log("Error in payment order!!=>", payload);
       return { ...state, loading: false };
 
     default:

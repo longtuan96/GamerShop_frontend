@@ -6,6 +6,7 @@ import { Divider, Button, IconButton, Text, Box } from "@chakra-ui/react";
 import { DeleteIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Home, Wallet } from "react-iconly";
 import GameMedia from "./GameMedia";
+import { useHistory } from "react-router";
 const UserCart = () => {
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
@@ -14,13 +15,14 @@ const UserCart = () => {
   const subTotal = useSelector((state) => state.order.subTotal);
   const discount = useSelector((state) => state.order.discount);
   const loading = useSelector((state) => state.order.loading);
-
-  const handleClick = (btnName, id) => {
+  const history = useHistory();
+  const handleClick = (btnName, idOrTotal) => {
     switch (btnName) {
       case "remove":
-        dispatch(orderActions.removeItemCurrentOrder(id));
+        dispatch(orderActions.removeItemCurrentOrder(idOrTotal));
         break;
       case "payment":
+        dispatch(orderActions.paymentOrder(idOrTotal));
         break;
 
       default:
@@ -78,7 +80,14 @@ const UserCart = () => {
                     p="5"
                     borderRadius="md"
                     borderWidth="1px"
-                    style={{ boxShadow: "2px 2px 3px black" }}
+                    _hover={{
+                      transform: "scale(1.05)",
+                    }}
+                    style={{
+                      transition: "0.5s ease",
+                      boxShadow: "2px 2px 3px black",
+                    }}
+                    onClick={() => history.push("/user/payment_setting")}
                   >
                     <Row>
                       <Col
@@ -114,10 +123,10 @@ const UserCart = () => {
                   </Text>
                   {currentOrder.games &&
                     currentOrder.games.map((item) => (
-                      <>
+                      <div key={item._id}>
                         <Divider color="gray" mt={4} mb={4} />
                         <GameMedia game={item} />
-                      </>
+                      </div>
                     ))}
                 </div>
                 <Divider color="gray" mt={4} mb={4} />
@@ -133,7 +142,7 @@ const UserCart = () => {
                     isLoading={loading}
                     colorScheme="blue"
                     isFullWidth={true}
-                    onClick={() => handleClick("payment")}
+                    onClick={() => handleClick("payment", total)}
                   >
                     Confirm Purchase
                   </Button>

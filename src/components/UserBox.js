@@ -23,9 +23,11 @@ import {
   MenuList,
   MenuItem,
   Avatar,
+  Center,
 } from "@chakra-ui/react";
 
 import { StarIcon } from "@chakra-ui/icons";
+import { Col, Row } from "react-bootstrap";
 
 const UserBox = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -68,7 +70,7 @@ const UserBox = () => {
   };
   return (
     <div>
-      {isAuthenticated ? (
+      {isAuthenticated && currentUser ? (
         <>
           {/* <div className="NavBar-dropdown">
             <button onClick={() => handleClick("user")} className="NavBar-btn">
@@ -98,10 +100,40 @@ const UserBox = () => {
             <MenuButton
               as={IconButton}
               aria-label="Options"
-              icon={<Avatar name={currentUser.name} size="xs" />}
+              icon={
+                <Avatar
+                  name={currentUser.name}
+                  src={currentUser.avatarUrl}
+                  size="xs"
+                />
+              }
               variant=""
             />
             <MenuList>
+              <MenuItem
+                onClick={() => {
+                  history.push("/user/profile");
+                }}
+              >
+                <Row style={{ width: "100%", padding: "10px" }}>
+                  <Col lg={4}>
+                    <Center h={"100%"}>
+                      <Avatar
+                        size="md"
+                        name={currentUser.name}
+                        src={currentUser.avatarUrl}
+                      />
+                    </Center>
+                  </Col>
+                  <Col>
+                    <Text fontSize="md" fontWeight="bold">
+                      {currentUser.name}
+                    </Text>
+
+                    <Text fontSize="sm">{currentUser.email}</Text>
+                  </Col>
+                </Row>
+              </MenuItem>
               <MenuItem
                 onClick={() => {
                   history.push("/user/profile");
@@ -136,6 +168,7 @@ const UserBox = () => {
           <IconButton
             ref={btnRef}
             colorScheme="white"
+            variant="ghost"
             onClick={onOpen}
             icon={
               <FontAwesomeIcon

@@ -22,9 +22,9 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_REQUEST:
       return { ...state, loading: true };
     case types.LOGIN_SUCCESS:
-      console.log(">>>>>>", payload);
       localStorage.setItem("accessToken", payload.accessToken);
       localStorage.setItem("role", payload.user.role);
+      api.defaults.headers["authorization"] = "Bearer " + payload.accessToken;
 
       return {
         ...state,

@@ -62,6 +62,13 @@ const MembersPage = () => {
     dispatch(userActions.getAllUsers());
   }, []);
 
+  const formatCurrency = (number) => {
+    if (number)
+      return number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+  };
   return (
     <>
       <h1>This is Member page</h1>
@@ -85,7 +92,7 @@ const MembersPage = () => {
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.gender}</td>
-                <td>{`$${item.balance}`}</td>
+                <td>{item.balance && formatCurrency(item.balance)}</td>
                 <td>{item.isDeleted ? "Yes" : "No"}</td>
                 <td className="">
                   <Button
@@ -145,11 +152,12 @@ const MembersPage = () => {
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>avatarUrl</Form.Label>
-                <Form.Control
+                {/* <Form.Control
                   type="file"
                   name="avatarUrl"
                   onChange={handleChange}
-                />
+                /> */}
+                Work in progress
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>

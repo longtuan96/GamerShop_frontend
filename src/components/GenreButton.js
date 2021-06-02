@@ -27,7 +27,7 @@ const GenreButton = ({ title, picture }) => {
       bg="#f5f6f7"
       borderColor="#ccd0d5"
       color="#4b4f56"
-      _hover={{ bg: "#ebedf0" }}
+      _hover={{ bg: "#ebedf0", border: "10px solid blue" }}
       _active={{
         bg: "#dddfe2",
         transform: "scale(0.98)",

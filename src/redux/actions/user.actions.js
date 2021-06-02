@@ -34,8 +34,9 @@ const updateCurrentUser = (data) => async (dispatch) => {
     const res = await api.put(`/user`, data);
     dispatch({
       type: types.USER_UPDATE_SUCCESS,
-      payload: res.data.data.user,
+      payload: res.data.data.newUser,
     });
+    dispatch(userActions.getCurrentUser());
   } catch (error) {
     dispatch({ type: types.USER_UPDATE_FAILURE, payload: error.message });
   }

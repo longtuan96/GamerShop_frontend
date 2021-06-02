@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../redux/actions/user.actions";
+import { Box, Text, Button, Divider } from "@chakra-ui/react";
+import { SettingsIcon } from "@chakra-ui/icons";
 
 const UserPayment = () => {
   const dispatch = useDispatch();
@@ -19,27 +21,42 @@ const UserPayment = () => {
     dispatch(userActions.topUpCurrentUser(formData));
   };
 
+  const formatCurrency = (number) => {
+    if (number)
+      return number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+  };
+
   return (
     <>
-      <h1>Payment Settings</h1>
-      <div>
-        <p>Wallet Balance</p>
-        <p>{`$${currentUser.balance}`}</p>
-      </div>
-      <div>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasic">
-            <Form.Control
-              type="text"
-              placeholder="Fund"
-              name="topUp"
-              onChange={handleChange}
-            />
-            <Button variant="primary" type="submit">
-              Add Funds
-            </Button>
-          </Form.Group>
-        </Form>
+      <div style={{ padding: "5%" }}>
+        <Text fontSize="2xl" fontWeight="bold">
+          Payment Settings
+        </Text>
+        <Box pt={"5%"} w={"60%"}>
+          <Text>{`Balance: ${formatCurrency(currentUser.balance)}`}</Text>
+
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasic">
+              <Form.Control
+                type="text"
+                placeholder="Fund"
+                name="topUp"
+                onChange={handleChange}
+              />
+              <Button
+                variant="solid"
+                colorScheme="blue"
+                type="submit"
+                mt={"4%"}
+              >
+                Add Funds
+              </Button>
+            </Form.Group>
+          </Form>
+        </Box>
       </div>
     </>
   );

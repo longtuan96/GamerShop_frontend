@@ -13,11 +13,11 @@ const getGames = () => async (dispatch) => {
   }
 };
 
-const getAllGames = () => async (dispatch) => {
+const getAllGames = (name, page) => async (dispatch) => {
   dispatch({ type: types.GAME_GETALL_REQUEST, payload: null });
   try {
-    const res = await api.get("/game/admin?isDeleted=true&&isDeleted=false");
-    dispatch({ type: types.GAME_GETALL_SUCCESS, payload: res.data.data.games });
+    const res = await api.get(`/game/admin?page=${page}&name=${name}`);
+    dispatch({ type: types.GAME_GETALL_SUCCESS, payload: res.data.data });
   } catch (error) {
     dispatch({ type: types.GAME_GETALL_FAILURE, payload: error.message });
   }

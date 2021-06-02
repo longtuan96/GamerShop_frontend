@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Form, Button, Modal } from "react-bootstrap";
+import { Select } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/actions/user.actions";
 
@@ -11,16 +12,41 @@ const UserProfileEditBox = ({ btn }) => {
     name: null,
     gender: null,
     language: null,
-    avatar: null,
+    avatarUrl: null,
   });
+  //Cloudinary upload widget
+  let myCropWidget = window.cloudinary.createUploadWidget(
+    {
+      cloudName: "siris",
+      uploadPreset: "sirisimages",
 
-  const handleChange = (e) =>
+      cropping: false,
+      sources: ["local"],
+      showAdvancedOptions: true,
+    },
+    (error, result) => {
+      if (result.event === "success") {
+        let data = { avatarUrl: result.info.secure_url };
+        dispatch(userActions.updateCurrentUser(data));
+
+        // setFormData({ ...formData, avatarUrl: result.info.secure_url });
+      }
+    }
+  );
+
+  const open = () => {
+    myCropWidget.open();
+  };
+
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(userActions.updateCurrentUser(formData));
   };
+
   return (
     <>
       <Modal.Header>
@@ -41,13 +67,21 @@ const UserProfileEditBox = ({ btn }) => {
               </>
             ) : btn === "Gender" ? (
               <>
-                <Form.Label>Gender</Form.Label>
+                {/* <Form.Label>Gender</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder={`Gender (current:${currentUser.gender})`}
                   name="gender"
                   onChange={handleChange}
-                />
+                /> */}
+                <Select
+                  placeholder="Select option"
+                  name="gender"
+                  onChange={handleChange}
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </Select>
               </>
             ) : btn === "Language" ? (
               <>
@@ -62,7 +96,9 @@ const UserProfileEditBox = ({ btn }) => {
             ) : (
               <>
                 <Form.Label>Avatar</Form.Label>
-                <h1>Work in progress</h1>
+                <h1>
+                  <button onClick={open}>test widget</button>
+                </h1>
               </>
             )}
           </Form.Group>

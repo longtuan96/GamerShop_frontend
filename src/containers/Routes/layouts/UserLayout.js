@@ -22,6 +22,8 @@ import {
 } from "@chakra-ui/react";
 import { Navigation } from "react-minimal-side-navigation";
 import logo from "../../../GamerShop_white.svg";
+import { orderActions } from "../../../redux/actions/order.actions";
+import UserOrder from "../../User/UserOrder";
 const UserLayout = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -29,8 +31,18 @@ const UserLayout = () => {
   const [testLoading, setTestLoading] = useState(false);
   const loading = useSelector((state) => state.user.loading);
   const currentUser = useSelector((state) => state.user.currentUser);
+
+  const formatCurrency = (number) => {
+    if (number)
+      return number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+  };
+
   useEffect(() => {
     dispatch(userActions.getCurrentUser());
+    dispatch(orderActions.getCurrentAllOrder());
   }, []);
 
   useEffect(() => {
@@ -89,10 +101,12 @@ const UserLayout = () => {
                     </Center>
                   </Col>
                   <Col>
-                    <Text fontSize="sm" fontWeight="bold">
+                    <Text fontSize="md" fontWeight="bold">
                       {currentUser.name}
                     </Text>
-                    <Text>{`Balance: $${currentUser.balance}`}</Text>
+                    <Text fontSize="sm">{`Balance: ${formatCurrency(
+                      currentUser.balance
+                    )}`}</Text>
                     <Text fontSize="sm">{currentUser.email}</Text>
                   </Col>
                 </Row>
@@ -116,7 +130,7 @@ const UserLayout = () => {
                     },
                     {
                       title: "Order History",
-                      itemId: "/user",
+                      itemId: "/user/order_history",
                     },
                     {
                       title: "Back to Website",
@@ -135,7 +149,7 @@ const UserLayout = () => {
                   component={UserPayment}
                 />
                 <Route exact path="/user/library" component={UserLibrary} />
-                <Route exact path="/user" component={""} />
+                <Route exact path="/user/order_history" component={UserOrder} />
               </Switch>
             </Col>
           </Row>

@@ -19,13 +19,9 @@ const WishList = () => {
           </Text>
         </div>
         <div>
+          <Divider color="gray" mt={4} mb={4} />
           {currentUserFavorite &&
-            currentUserFavorite.map((item) => (
-              <>
-                <Divider color="gray" mt={4} mb={4} />
-                <GameMedia game={item} />
-              </>
-            ))}
+            currentUserFavorite.map((item) => <GameMedia game={item} />)}
         </div>
       </div>
     </div>

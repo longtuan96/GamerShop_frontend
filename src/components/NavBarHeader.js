@@ -67,7 +67,15 @@ const NavBarHeader = () => {
         }
       >
         <Col className="d-flex justify-content-start align-items-center">
-          <Image src="GamerShop_black.svg" alt="shop name" w="200px" h="auto" />
+          <Image
+            src="GamerShop_black.svg"
+            alt="shop name"
+            w="200px"
+            h="auto"
+            onClick={() => {
+              history.push("/latest");
+            }}
+          />
         </Col>
         <Col className="d-flex justify-content-center align-items-center">
           <NavLink

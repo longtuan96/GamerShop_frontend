@@ -21,19 +21,19 @@ const DetailPage = () => {
     switch (btn) {
       case "add to cart":
         dispatch(orderActions.addItemCurrentOrder(id));
-        dispatch(userActions.getCurrentUser());
+
         break;
       case "add to favorite":
         dispatch(userActions.addToFavorite(id));
-        dispatch(userActions.getCurrentUser());
+
         break;
       case "remove from favorite":
         dispatch(userActions.removeFromFavorite(id));
-        dispatch(userActions.getCurrentUser());
+
         break;
       case "remove from cart":
         dispatch(orderActions.removeItemCurrentOrder(id));
-        dispatch(userActions.getCurrentUser());
+
         break;
       default:
         break;
@@ -121,6 +121,14 @@ const DetailPage = () => {
                   <Button
                     variant="solid"
                     colorScheme="blue"
+                    isDisabled={
+                      currentUser &&
+                      currentUser.ownedGames.filter(
+                        (item) => item._id === selectedGame._id
+                      ).length === 0
+                        ? true
+                        : false
+                    }
                     onClick={() => handleClick("add to cart", selectedGame._id)}
                   >
                     {" "}
