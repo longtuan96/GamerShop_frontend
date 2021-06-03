@@ -16,33 +16,6 @@ const LatestPage = () => {
     <>
       {game && (
         <>
-          {/* <HomeBoard
-            name={game.name}
-            description={game.description}
-            poster={game.poster}
-            gameId={game._id}
-          /> */}
-          {/* <Center
-            h="100vh"
-            w="100%"
-            bg={`url("images/BGTest3.jpg") center  no-repeat `}
-            style={{
-              zIndex: "5",
-            }}
-          >
-            <Center
-              style={{
-                height: "400px",
-                width: "400px",
-                background: "rgba(5,3,33,0.7)",
-                borderRadius: "50%",
-              }}
-            >
-              <Text fontSize="lg" fontWeight="extrabold" color="white">
-                GAMERSHOP
-              </Text>
-            </Center>
-          </Center> */}
           <Center
             style={{
               width: "100%",
@@ -147,9 +120,10 @@ const LatestPage = () => {
                   <Row>
                     <Col>
                       <GameBox
-                        poster="images/fifaTest.jpg"
-                        title="EA SPORTS FIFA 21"
-                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                        poster={games[8] && games[8].poster}
+                        title={games[8] && games[8].name}
+                        description={games[8] && games[8].description}
+                        gameId={games[8] && games[8]._id}
                       />
                     </Col>
                     <Col>
