@@ -2,13 +2,14 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import SmallGameBox from "../../components/SmallGameBox";
-
+let Loader = require("react-loader");
 const SearchPage = ({}) => {
+  const loading = useSelector((state) => state.game.loading);
   const searchGames = useSelector((state) => state.game.searchGames);
   return (
     <div style={{ padding: "100px" }}>
       <h1>Search</h1>
-      <div>
+      <Loader loaded={!loading}>
         <Row>
           {searchGames &&
             searchGames.map((item) => (
@@ -17,7 +18,7 @@ const SearchPage = ({}) => {
               </Col>
             ))}
         </Row>
-      </div>
+      </Loader>
     </div>
   );
 };

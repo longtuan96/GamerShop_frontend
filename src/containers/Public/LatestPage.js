@@ -7,13 +7,13 @@ import GameSlider from "../../components/GameSlider";
 import { Box, Text, Center } from "@chakra-ui/react";
 import HomeBoard from "../../components/HomeBoard";
 import UserCart from "../../components/UserCart";
-
+let Loader = require("react-loader");
 const LatestPage = () => {
   const games = useSelector((state) => state.game.games);
   const game = useSelector((state) => state.game.game);
   const loading = useSelector((state) => state.game.loading);
   return (
-    <>
+    <Loader loaded={!loading}>
       {game && (
         <>
           <Center
@@ -173,7 +173,7 @@ const LatestPage = () => {
           </Container> */}
         </>
       )}
-    </>
+    </Loader>
   );
 };
 

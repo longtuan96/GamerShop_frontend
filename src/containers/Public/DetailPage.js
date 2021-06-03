@@ -6,7 +6,7 @@ import { gameActions } from "../../redux/actions/game.actions";
 import { orderActions } from "../../redux/actions/order.actions";
 import { userActions } from "../../redux/actions/user.actions";
 import { Box, Text, Divider, Tag, Button } from "@chakra-ui/react";
-
+import { Heart2 } from "react-iconly";
 const DetailPage = () => {
   const history = useHistory();
   const { id } = useParams();
@@ -14,7 +14,8 @@ const DetailPage = () => {
   let isAuthenticated = localStorage.getItem("isAuthenticated");
   const currentUser = useSelector((state) => state.user.currentUser);
   const selectedGame = useSelector((state) => state.game.selectedGame);
-  const loading = useSelector((state) => state.game.loading);
+  const loading = useSelector((state) => state.order.loading);
+  const loadingUser = useSelector((state) => state.user.loading);
   const handleGoBack = () => {
     history.goBack();
   };
@@ -43,6 +44,14 @@ const DetailPage = () => {
   useEffect(() => {
     dispatch(gameActions.getSingleGame(id));
   }, []);
+
+  const formatCurrency = (number) => {
+    if (number)
+      return number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+  };
 
   return (
     <>
@@ -98,9 +107,12 @@ const DetailPage = () => {
                 </Text>
                 <Text fontSize="lg">{selectedGame.description}</Text>
                 <Divider />
+                <Text fontWeight="bold" fontSize="xl" pt={4}>
+                  {formatCurrency(selectedGame.price)}
+                </Text>
               </div>
 
-              <div style={{ margin: "30px 0" }}>
+              <div style={{ margin: "10px 0" }}>
                 {selectedGame.genre &&
                   selectedGame.genre.map((item) => (
                     <>
@@ -121,6 +133,7 @@ const DetailPage = () => {
                 selectedGame &&
                 currentUser.cart.games.indexOf(selectedGame._id) === -1 ? (
                   <Button
+                    isLoading={loading}
                     variant="solid"
                     colorScheme="blue"
                     isDisabled={
@@ -138,6 +151,7 @@ const DetailPage = () => {
                   </Button>
                 ) : (
                   <Button
+                    isLoading={loading}
                     variant="solid"
                     colorScheme="red"
                     onClick={() =>
@@ -153,16 +167,18 @@ const DetailPage = () => {
                   (item) => item._id === selectedGame._id
                 ).length === 0 ? (
                   <Button
+                    isLoading={loadingUser}
                     variant="solid"
                     colorScheme="green"
                     onClick={() =>
                       handleClick("add to favorite", selectedGame._id)
                     }
                   >
-                    heart
+                    <Heart2 set="curved" primaryColor="blueviolet" />
                   </Button>
                 ) : (
                   <Button
+                    isLoading={loadingUser}
                     variant="solid"
                     colorScheme="red"
                     onClick={() =>
@@ -177,7 +193,7 @@ const DetailPage = () => {
               <Button
                 variant="outline"
                 colorScheme="red"
-                mt={8}
+                mt={5}
                 onClick={handleGoBack}
               >
                 Back

@@ -30,6 +30,7 @@
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-iconly": "^2.2.2",
+    "react-loader": "^2.4.7",
     "react-markdown": "^6.0.2",
     "react-minimal-side-navigation": "^1.8.0",
     "react-moment": "^1.1.1",

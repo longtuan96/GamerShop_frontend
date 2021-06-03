@@ -14,6 +14,7 @@ const LoginPage = () => {
   const FB_APP_ID = process.env.REACT_APP_FB_APP_ID;
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const history = useHistory();
+  const loading = useSelector((state) => state.auth.loading);
   const redirectTo = useSelector((state) => state.route.redirectTo);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
@@ -35,7 +36,6 @@ const LoginPage = () => {
   // if (accessToken !== "" && accessToken !== null && accessToken !== undefined) {
   //   isAuthenticated = true;
   // }
-  const loading = useSelector((state) => state.auth.loading);
 
   const handleClick = () => {
     history.push("/register");
@@ -146,6 +146,7 @@ const LoginPage = () => {
               </Form.Group>
 
               <Button
+                isLoading={loading}
                 colorScheme="blue"
                 isFullWidth={true}
                 type="submit"

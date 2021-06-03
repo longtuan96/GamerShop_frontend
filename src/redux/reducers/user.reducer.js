@@ -52,6 +52,7 @@ const userReducer = (state = initialState, action) => {
     case types.USER_ADDTOFAVORITE_SUCCESS:
       return {
         ...state,
+
         loading: false,
       };
     case types.USER_ADDTOFAVORITE_FAILURE:
@@ -63,6 +64,7 @@ const userReducer = (state = initialState, action) => {
     case types.USER_REMOVEFROMFAVORITE_SUCCESS:
       return {
         ...state,
+
         loading: false,
       };
     case types.USER_REMOVEFROMFAVORITE_FAILURE:

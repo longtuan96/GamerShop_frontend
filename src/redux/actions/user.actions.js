@@ -62,7 +62,7 @@ const addToFavorite = (gameId) => async (dispatch) => {
     const res = await api.post(`/user/favorite`, { game: gameId });
     dispatch({
       type: types.USER_ADDTOFAVORITE_SUCCESS,
-      payload: res.data.data.message,
+      payload: res.data.data.newUser,
     });
     dispatch(userActions.getCurrentUser());
   } catch (error) {
@@ -79,7 +79,7 @@ const removeFromFavorite = (gameId) => async (dispatch) => {
     const res = await api.delete(`/user/favorite/${gameId}`);
     dispatch({
       type: types.USER_REMOVEFROMFAVORITE_SUCCESS,
-      payload: res.data.data.message,
+      payload: res.data.data.newUser,
     });
     dispatch(userActions.getCurrentUser());
   } catch (error) {

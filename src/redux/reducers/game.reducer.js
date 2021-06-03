@@ -10,7 +10,7 @@ const initialState = {
   game: {},
   selectedGame: {},
   totalPage: 0,
-  loading: true,
+  loading: false,
 };
 
 const randomNumber = (someNumber) => {

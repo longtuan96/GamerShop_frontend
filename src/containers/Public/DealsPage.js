@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import SmallGameBox from "../../components/SmallGameBox";
 import { gameActions } from "../../redux/actions/game.actions";
 import { Box, Text } from "@chakra-ui/react";
+let Loader = require("react-loader");
 const DealsPage = () => {
+  const loading = useSelector((state) => state.game.loading);
   const deals = useSelector((state) => state.game.deals);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,7 +20,7 @@ const DealsPage = () => {
             Deals
           </Text>
         </div>
-        <div>
+        <Loader loaded={!loading}>
           <Row>
             {deals &&
               deals.map((item) => (
@@ -27,7 +29,7 @@ const DealsPage = () => {
                 </Col>
               ))}
           </Row>
-        </div>
+        </Loader>
       </div>
     </div>
   );

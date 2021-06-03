@@ -6,6 +6,7 @@ import { authActions } from "../../redux/actions/auth.actions";
 import { routeActions } from "../../redux/actions/route.actions";
 import { Image, Box, Text, Button } from "@chakra-ui/react";
 const RegisterPage = () => {
+  const loading = useSelector((state) => state.auth.loading);
   const dispatch = useDispatch();
   const history = useHistory();
   const redirectTo = useSelector((state) => state.route.redirectTo);
@@ -117,6 +118,7 @@ const RegisterPage = () => {
               </Form.Group>
 
               <Button
+                isLoading={loading}
                 isFullWidth
                 mt={4}
                 colorScheme="blue"
