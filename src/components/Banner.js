@@ -36,7 +36,12 @@ const Banner = ({ poster, trailer, description, title, gameId, isRight }) => {
                   </Text>
                   <Text fontSize="md">{description}</Text>
                 </div>
-                <Button colorScheme="blue" m={"20px 10px"} borderRadius="50px">
+                <Button
+                  colorScheme="blue"
+                  m={"20px 10px"}
+                  borderRadius="50px"
+                  onClick={() => handleClick(gameId)}
+                >
                   Find out more
                 </Button>
               </Box>

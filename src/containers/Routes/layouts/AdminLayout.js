@@ -19,7 +19,6 @@ const AdminLayout = () => {
           <AlertMsg />
           <Col lg={3}>
             <div>
-              <h1>Welcome Master</h1>
               <Navigation
                 activeItemId={location.pathname}
                 onSelect={({ itemId }) => {

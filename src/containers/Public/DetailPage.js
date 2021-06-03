@@ -11,6 +11,7 @@ const DetailPage = () => {
   const history = useHistory();
   const { id } = useParams();
   const dispatch = useDispatch();
+  let isAuthenticated = localStorage.getItem("isAuthenticated");
   const currentUser = useSelector((state) => state.user.currentUser);
   const selectedGame = useSelector((state) => state.game.selectedGame);
   const loading = useSelector((state) => state.game.loading);
@@ -116,16 +117,17 @@ const DetailPage = () => {
               </div>
 
               <div>
-                {currentUser.cart &&
+                {currentUser &&
+                selectedGame &&
                 currentUser.cart.games.indexOf(selectedGame._id) === -1 ? (
                   <Button
                     variant="solid"
                     colorScheme="blue"
                     isDisabled={
+                      isAuthenticated &&
                       currentUser &&
-                      currentUser.ownedGames.filter(
-                        (item) => item._id === selectedGame._id
-                      ).length === 0
+                      selectedGame &&
+                      currentUser.ownedGames.indexOf(selectedGame._id) !== -1
                         ? true
                         : false
                     }

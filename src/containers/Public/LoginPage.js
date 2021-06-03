@@ -7,21 +7,34 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { authActions } from "../../redux/actions/auth.actions";
 import { routeActions } from "../../redux/actions/route.actions";
 import { Image, Box, Text, Button } from "@chakra-ui/react";
+import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
+
 const LoginPage = () => {
+  const FB_APP_ID = process.env.REACT_APP_FB_APP_ID;
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const history = useHistory();
   const redirectTo = useSelector((state) => state.route.redirectTo);
-
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  let isAuthenticated = false;
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken !== "" && accessToken !== null && accessToken !== undefined) {
-    isAuthenticated = true;
-  }
+  const loginWithFacebook = (response) => {
+    dispatch(authActions.loginWithFb(response.accessToken));
+  };
+
+  const loginWithGoogle = (response) => {
+    dispatch(authActions.loginGoogleRequest());
+  };
+
+  // let isAuthenticated = false;
+  // const accessToken = localStorage.getItem("accessToken");
+  // if (accessToken !== "" && accessToken !== null && accessToken !== undefined) {
+  //   isAuthenticated = true;
+  // }
   const loading = useSelector((state) => state.auth.loading);
 
   const handleClick = () => {
@@ -72,8 +85,45 @@ const LoginPage = () => {
           />
         </div>
         <Box p="30px">
+          <FacebookLogin
+            appId={FB_APP_ID}
+            fields="name,email,picture"
+            callback={loginWithFacebook}
+            icon="fa-facebook"
+            onFailure={(err) => {
+              console.log("FB LOGIN ERROR:", err);
+            }}
+            containerStyle={{
+              textAlign: "center",
+              backgroundColor: "#3b5998",
+              borderColor: "#3b5998",
+              flex: 1,
+              display: "flex",
+              color: "#fff",
+              cursor: "pointer",
+              marginBottom: "3px",
+            }}
+            buttonStyle={{
+              flex: 1,
+              textTransform: "none",
+              padding: "12px",
+              background: "none",
+              border: "none",
+            }}
+          />
+
+          {/* <GoogleLogin
+            className="google-btn d-flex justify-content-center"
+            clientId={GOOGLE_CLIENT_ID}
+            buttonText="Login with Google"
+            onSuccess={loginWithGoogle}
+            onFailure={(err) => {
+              console.log("GOOGLE LOGIN ERROR:", err);
+            }}
+            cookiePolicy="single_host_origin"
+          /> */}
           <Text align="center" fontSize="sm">
-            Please sign-in with one of your account
+            Or sign-in with one of your account
           </Text>
           <Box p="30px">
             <Form onSubmit={handleSubmit}>

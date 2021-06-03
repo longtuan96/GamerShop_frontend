@@ -16,7 +16,7 @@ const UserLibrary = () => {
             Game Bought
           </Text>
           {currentUser &&
-            currentUser.favorite.map((item) => (
+            currentUser.ownedGames.map((item) => (
               <Row
                 style={{
                   margin: "5% 0",

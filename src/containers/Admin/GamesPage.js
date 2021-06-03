@@ -126,8 +126,8 @@ const GamesPage = () => {
   return (
     <>
       <div style={{ padding: "5%" }}>
-        <Text fontSize="2xl" fontWeight="bold">
-          Profile
+        <Text pb={4} fontSize="2xl" fontWeight="bold">
+          ADDED GAMES
         </Text>
         <Button variant="primary" onClick={() => handleShow("Add Game")}>
           Add Game
@@ -238,7 +238,7 @@ const GamesPage = () => {
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter you name"
+                    placeholder="New Name"
                     name="name"
                     onChange={handleChange}
                   />

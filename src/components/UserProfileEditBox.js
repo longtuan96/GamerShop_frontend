@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Card, Form, Button, Modal } from "react-bootstrap";
+import { Card, Form, Modal } from "react-bootstrap";
 import { Select } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/actions/user.actions";
-
+import { Button } from "@chakra-ui/react";
 const UserProfileEditBox = ({ btn }) => {
   const dispatch = useDispatch();
 
@@ -97,7 +97,7 @@ const UserProfileEditBox = ({ btn }) => {
               <>
                 <Form.Label>Avatar</Form.Label>
                 <h1>
-                  <button onClick={open}>test widget</button>
+                  <Button onClick={open}>Edit Image</Button>
                 </h1>
               </>
             )}

@@ -50,7 +50,7 @@ const GameMedia = ({ game }) => {
         <Col>
           <Button
             leftIcon={<DeleteIcon />}
-            onClick={() => handleClick("remove", game._id)}
+            onClick={() => handleClick(game._id)}
           >
             Remove
           </Button>

@@ -31,9 +31,28 @@ const loginRequest = (email, password) => async (dispatch) => {
   }
 };
 
+const loginWithFb = (access_token) => async (dispatch) => {
+  try {
+    dispatch({ type: types.FACEBOOK_REQUEST, payload: null });
+    const res = await api.post("/auth/login/facebook", { access_token });
+    localStorage.setItem("accessToken", res.data.data.accessToken);
+    // localStorage.setItem("isAdmin", res.data.data.user.position);
+    api.defaults.headers["authorization"] =
+      "Bearer " + localStorage.getItem("accessToken");
+    dispatch(routeActions.redirect("/"));
+    console.log("aaaaREs", res);
+    dispatch({
+      type: types.FACEBOOK_SUCCESS,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    dispatch({ type: types.FACEBOOK_FAILURE, payload: error.message });
+  }
+};
+
 const logoutRequest = () => async (dispatch) => {
   dispatch({ type: types.LOGOUT_REQUEST, payload: null });
-  api.defaults.headers.common["authorization"] = "";
+  api.defaults.headers["authorization"] = "";
   localStorage.clear();
 
   dispatch({ type: types.LOGOUT_SUCCESS, payload: null });
@@ -43,4 +62,5 @@ export const authActions = {
   register,
   loginRequest,
   logoutRequest,
+  loginWithFb,
 };

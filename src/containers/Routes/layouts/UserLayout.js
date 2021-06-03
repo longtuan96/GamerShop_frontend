@@ -104,9 +104,9 @@ const UserLayout = () => {
                     <Text fontSize="md" fontWeight="bold">
                       {currentUser.name}
                     </Text>
-                    <Text fontSize="sm">{`Balance: ${formatCurrency(
-                      currentUser.balance
-                    )}`}</Text>
+                    <Text fontSize="sm">{`Balance: ${
+                      formatCurrency(currentUser.balance) || `$0`
+                    }`}</Text>
                     <Text fontSize="sm">{currentUser.email}</Text>
                   </Col>
                 </Row>

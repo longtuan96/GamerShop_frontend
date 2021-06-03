@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Table, Modal, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../redux/actions/user.actions";
-
+import { Text } from "@chakra-ui/react";
 const MembersPage = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
@@ -70,8 +70,10 @@ const MembersPage = () => {
       });
   };
   return (
-    <>
-      <h1>This is Member page</h1>
+    <div style={{ padding: "5%" }}>
+      <Text pb={4} fontSize="2xl" fontWeight="bold">
+        REGISTERED USER
+      </Text>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -185,7 +187,7 @@ const MembersPage = () => {
           </>
         )}
       </Modal>
-    </>
+    </div>
   );
 };
 

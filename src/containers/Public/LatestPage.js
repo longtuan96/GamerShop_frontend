@@ -104,8 +104,8 @@ const LatestPage = () => {
                     <GameBox
                       poster={games[5] && games[5].poster}
                       title={games[5] && games[5].name}
-                      description={games && games[5].description}
-                      gameId={games && games[5]._id}
+                      description={games[5] && games[5].description}
+                      gameId={games[5] && games[5]._id}
                     />
                   </Col>
                   <Col lg={6}>
@@ -154,9 +154,10 @@ const LatestPage = () => {
                     </Col>
                     <Col>
                       <GameBox
-                        poster="images/fifaTest.jpg"
-                        title="EA SPORTS FIFA 21"
-                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                        poster={games[11] && games[11].poster}
+                        title={games[11] && games[11].name}
+                        description={games[11] && games[11].description}
+                        gameId={games[11] && games[11]._id}
                       />
                     </Col>
                   </Row>
@@ -164,23 +165,26 @@ const LatestPage = () => {
                   <Row>
                     <Col>
                       <GameBox
-                        poster="images/fifaTest.jpg"
-                        title="EA SPORTS FIFA 21"
-                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                        poster={games[10] && games[10].poster}
+                        title={games[10] && games[10].name}
+                        description={games[10] && games[10].description}
+                        gameId={games[10] && games[10]._id}
                       />
                     </Col>
                     <Col>
                       <GameBox
-                        poster="images/fifaTest.jpg"
-                        title="EA SPORTS FIFA 21"
-                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                        poster={games[9] && games[9].poster}
+                        title={games[9] && games[9].name}
+                        description={games[9] && games[9].description}
+                        gameId={games[9] && games[9]._id}
                       />
                     </Col>
                     <Col>
                       <GameBox
-                        poster="images/fifaTest.jpg"
-                        title="EA SPORTS FIFA 21"
-                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                        poster={games[7] && games[7].poster}
+                        title={games[7] && games[7].name}
+                        description={games[7] && games[7].description}
+                        gameId={games[7] && games[7]._id}
                       />
                     </Col>
                   </Row>

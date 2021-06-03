@@ -37,11 +37,12 @@ const UserBox = () => {
   const history = useHistory();
   const [show, setShow] = useState("");
 
-  let isAuthenticated = false;
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken !== "" && accessToken !== null && accessToken !== undefined) {
-    isAuthenticated = true;
-  }
+  // let isAuthenticated = false;
+  // const accessToken = localStorage.getItem("accessToken");
+  // if (accessToken !== "" && accessToken !== null && accessToken !== undefined) {
+  //   isAuthenticated = true;
+  // }
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
   const currentUser = useSelector((state) => state.user.currentUser);
   const handleClick = (btn) => {
     if (show === btn) {
@@ -72,30 +73,6 @@ const UserBox = () => {
     <div>
       {isAuthenticated && currentUser ? (
         <>
-          {/* <div className="NavBar-dropdown">
-            <button onClick={() => handleClick("user")} className="NavBar-btn">
-              <img
-                src="images/blank_avatar.jpg"
-                alt="avatar"
-                style={{ width: "20px" }}
-              />
-            </button>
-            <div
-              className={
-                show === "user"
-                  ? "NavBar-dropdown-content NavBar-dropdown-show"
-                  : "NavBar-dropdown-content"
-              }
-            >
-              <button onClick={() => handleUserButton("user information")}>
-                User Information
-              </button>
-              <button onClick={() => handleUserButton("sign out")}>
-                Sign Out
-              </button>
-            </div>
-          </div> */}
-
           <Menu>
             <MenuButton
               as={IconButton}

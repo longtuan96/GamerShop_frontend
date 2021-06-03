@@ -36,7 +36,9 @@ const UserPayment = () => {
           Payment Settings
         </Text>
         <Box pt={"5%"} w={"60%"}>
-          <Text>{`Balance: ${formatCurrency(currentUser.balance)}`}</Text>
+          <Text>{`Balance: ${
+            formatCurrency(currentUser.balance) || `$0`
+          }`}</Text>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasic">

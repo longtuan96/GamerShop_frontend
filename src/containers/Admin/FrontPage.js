@@ -20,12 +20,7 @@ const FrontPage = () => {
   const open = () => {
     myCropWidget.open();
   };
-  return (
-    <>
-      <h1>This is FRONT PAGE</h1>
-      <button onClick={open}>test widget</button>
-    </>
-  );
+  return <>{/* <button onClick={open}>test widget</button> */}</>;
 };
 
 export default FrontPage;
