@@ -73,108 +73,123 @@ const LatestPage = () => {
               far away.
             </Text>
           </Box>
-          <Banner
-            poster="images/testPoster.jpg"
-            trailer="gHzuHo80U2M"
-            description="Be greater. Be yourself. Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man."
-            title="Marvel's Spider-Man: Miles Morales"
-          />
-          <Banner
-            poster="images/testPoster.jpg"
-            trailer="gHzuHo80U2M"
-            description="Be greater. Be yourself. Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man."
-            title="Marvel's Spider-Man: Miles Morales"
-            isRight
-          />
-          <div style={{ padding: "5%" }}>
-            <Row>
-              <Col lg={6}>
-                <GameBox
-                  poster="images/fifaTest.jpg"
-                  title="EA SPORTS FIFA 21"
-                  description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                />
-              </Col>
-              <Col lg={6}>
-                <GameBox
-                  poster="images/fifaTest.jpg"
-                  title="EA SPORTS FIFA 21"
-                  description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                />
-              </Col>
-              <Col lg={6}>
-                <GameBox
-                  poster="images/fifaTest.jpg"
-                  title="EA SPORTS FIFA 21"
-                  description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                />
-              </Col>
-              <Col lg={6}>
-                <GameBox
-                  poster="images/fifaTest.jpg"
-                  title="EA SPORTS FIFA 21"
-                  description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                />
-              </Col>
-            </Row>
-          </div>
+          {games !== [] || games !== null || games !== undefined ? (
+            <>
+              <Banner
+                poster={games[1] && games[1].poster}
+                trailer="FKtaOY9lMvM"
+                description={games[1] && games[1].description}
+                title={games[1] && games[1].name}
+                gameId={games[1] && games[1]._id}
+              />
+              <Banner
+                poster={games[2] && games[2].poster}
+                trailer="n8i53TtQ6IQ"
+                description={games[2] && games[2].description}
+                title={games[2] && games[2].name}
+                gameId={games[2] && games[2]._id}
+                isRight
+              />
+              <div style={{ padding: "5%" }}>
+                <Row>
+                  <Col lg={6}>
+                    <GameBox
+                      poster={games[3] && games[3].poster}
+                      title={games[3] && games[3].name}
+                      description={games[3] && games[3].description}
+                      gameId={games[3] && games[3]._id}
+                    />
+                  </Col>
+                  <Col lg={6}>
+                    <GameBox
+                      poster={games[5] && games[5].poster}
+                      title={games[5] && games[5].name}
+                      description={games && games[5].description}
+                      gameId={games && games[5]._id}
+                    />
+                  </Col>
+                  <Col lg={6}>
+                    <GameBox
+                      poster={games[4] && games[4].poster}
+                      title={games[4] && games[4].name}
+                      description={games[4] && games[4].description}
+                      gameId={games[4] && games[4]._id}
+                    />
+                  </Col>
+                  <Col lg={6}>
+                    <GameBox
+                      poster={games[0] && games[0].poster}
+                      title={games[0] && games[0].name}
+                      description={games[0] && games[0].description}
+                      gameId={games[0] && games[0]._id}
+                    />
+                  </Col>
+                </Row>
+              </div>
 
-          <div
-            style={{ padding: "5%", background: "rgba(234, 234, 234, 0.5)" }}
-          >
-            <div className="text-center">
-              <Text fontSize="4xl" fontWeight="light" color="black">
-                Acclaimed HITS
-              </Text>
-              <Text fontSize="xl" fontWeight="light" color="black">
-                Embark on adventures you won’t find anywhere else – including
-                Marvel’s Spider-Man, God of War, The Last of Us, Dreams Universe
-                and more.
-              </Text>
-            </div>
-            <div>
-              <Row>
-                <Col>
-                  <GameBox
-                    poster="images/fifaTest.jpg"
-                    title="EA SPORTS FIFA 21"
-                    description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                  />
-                </Col>
-                <Col>
-                  <GameBox
-                    poster="images/fifaTest.jpg"
-                    title="EA SPORTS FIFA 21"
-                    description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                  />
-                </Col>
-              </Row>
+              <div
+                style={{
+                  padding: "5%",
+                  background: "rgba(234, 234, 234, 0.5)",
+                }}
+              >
+                <div className="text-center">
+                  <Text fontSize="4xl" fontWeight="light" color="black">
+                    Acclaimed HITS
+                  </Text>
+                  <Text fontSize="xl" fontWeight="light" color="black">
+                    Embark on adventures you won’t find anywhere else –
+                    including Marvel’s Spider-Man, God of War, The Last of Us,
+                    Dreams Universe and more.
+                  </Text>
+                </div>
+                <div>
+                  <Row>
+                    <Col>
+                      <GameBox
+                        poster="images/fifaTest.jpg"
+                        title="EA SPORTS FIFA 21"
+                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                      />
+                    </Col>
+                    <Col>
+                      <GameBox
+                        poster="images/fifaTest.jpg"
+                        title="EA SPORTS FIFA 21"
+                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                      />
+                    </Col>
+                  </Row>
 
-              <Row>
-                <Col>
-                  <GameBox
-                    poster="images/fifaTest.jpg"
-                    title="EA SPORTS FIFA 21"
-                    description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                  />
-                </Col>
-                <Col>
-                  <GameBox
-                    poster="images/fifaTest.jpg"
-                    title="EA SPORTS FIFA 21"
-                    description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                  />
-                </Col>
-                <Col>
-                  <GameBox
-                    poster="images/fifaTest.jpg"
-                    title="EA SPORTS FIFA 21"
-                    description="Take on everything from street football to official global competitions including the UEFA Champions League."
-                  />
-                </Col>
-              </Row>
-            </div>
-          </div>
+                  <Row>
+                    <Col>
+                      <GameBox
+                        poster="images/fifaTest.jpg"
+                        title="EA SPORTS FIFA 21"
+                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                      />
+                    </Col>
+                    <Col>
+                      <GameBox
+                        poster="images/fifaTest.jpg"
+                        title="EA SPORTS FIFA 21"
+                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                      />
+                    </Col>
+                    <Col>
+                      <GameBox
+                        poster="images/fifaTest.jpg"
+                        title="EA SPORTS FIFA 21"
+                        description="Take on everything from street football to official global competitions including the UEFA Champions League."
+                      />
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+            </>
+          ) : (
+            ""
+          )}
           {/* <Container style={{ background: "white", margin: "50px 0" }}>
             <GameSlider games={games} title={"New Games"} />
           </Container> */}

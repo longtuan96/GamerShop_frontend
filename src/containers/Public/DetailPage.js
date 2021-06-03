@@ -74,7 +74,7 @@ const DetailPage = () => {
                 position: "absolute",
                 top: "0",
                 left: "0",
-                width: "40%",
+                width: "50%",
                 height: "100%",
                 padding: "70px 0 0 50px",
               }}
@@ -87,7 +87,7 @@ const DetailPage = () => {
               </Text>
               <div
                 style={{
-                  width: "70%",
+                  width: "80%",
                   padding: "5% 0",
                 }}
               >

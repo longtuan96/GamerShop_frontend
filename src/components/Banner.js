@@ -1,7 +1,12 @@
 import React from "react";
 import { Box, Image, AspectRatio, Text, Button } from "@chakra-ui/react";
 import { Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router";
 const Banner = ({ poster, trailer, description, title, gameId, isRight }) => {
+  const history = useHistory();
+  const handleClick = (id) => {
+    history.push(`/game/${id}`);
+  };
   return (
     <Box
       p={"5% 10%"}
@@ -91,7 +96,12 @@ const Banner = ({ poster, trailer, description, title, gameId, isRight }) => {
                   </Text>
                   <Text fontSize="md">{description}</Text>
                 </div>
-                <Button colorScheme="blue" m={"20px 10px"} borderRadius="50px">
+                <Button
+                  colorScheme="blue"
+                  m={"20px 10px"}
+                  borderRadius="50px"
+                  onClick={() => handleClick(gameId)}
+                >
                   Find out more
                 </Button>
               </Box>

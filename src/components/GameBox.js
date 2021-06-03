@@ -1,6 +1,11 @@
 import React from "react";
 import { Box, Image, AspectRatio, Text, Button } from "@chakra-ui/react";
-const GameBox = ({ poster, title, description }) => {
+import { useHistory } from "react-router";
+const GameBox = ({ poster, title, description, gameId }) => {
+  const history = useHistory();
+  const handleClick = (id) => {
+    history.push(`/game/${id}`);
+  };
   return (
     <div className="text-center" style={{ width: "100%", marginTop: "10%" }}>
       <Box>
@@ -12,7 +17,7 @@ const GameBox = ({ poster, title, description }) => {
       <Text fontSize="md" fontWeight="light" mt="10px">
         {description}
       </Text>
-      <Button colorScheme="blue" mt="10px">
+      <Button colorScheme="blue" mt="10px" onClick={() => handleClick(gameId)}>
         Find out more
       </Button>
     </div>
